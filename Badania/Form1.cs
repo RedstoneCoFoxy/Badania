@@ -56,8 +56,29 @@ namespace BadaniaNFZ
             }
         }/// ================================================================
         List<Badania> WszystkieBadania = new List<Badania>();
-        // https://docs.microsoft.com/pl-pl/dotnet/api/system.collections.generic.list-1?view=net-5.0#definition
         
+            public class BadanieWKolejce
+            {
+                public int Numerek;
+                public int NextNumerek;
+                public Badania ObiektBadanie { get; set; }
+                public override string ToString()
+                {
+                    return "Pozycja 1" + " / " + ObiektBadanie.Data + " " + ObiektBadanie.Imie + " " + ObiektBadanie.Nazwa;
+                }
+                public int ReturnNumber()
+                {
+                    return Numerek;
+                }
+                public int ReturnNextNumber()
+                {
+                    return NextNumerek;
+                }
+            }
+        Queue<BadanieWKolejce> Kolejka = new Queue<BadanieWKolejce>();
+
+        // https://docs.microsoft.com/pl-pl/dotnet/api/system.collections.generic.list-1?view=net-5.0#definition
+
 
 
 
@@ -176,7 +197,18 @@ namespace BadaniaNFZ
             }
         }
 
+        void UpdateKolejka()
+        {
+            if (Kolejka.Count>0)
+            {
+                LabelKolejka_1.Text = Kolejka.Peek().ToString();  
+            }
+            else
+            {
+                LabelKolejka_1.Text = "/";
+            }
 
+        }
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -227,6 +259,7 @@ namespace BadaniaNFZ
         private void Sekundownik10_Tick(object sender, EventArgs e)
         {
             UpdateQueue();
+            UpdateKolejka();
             localDate = DateTime.Now;
             DataCzasLabel.Text = localDate.ToString("dd-MM-yyyy | HH-mm");
         }
@@ -343,6 +376,38 @@ namespace BadaniaNFZ
         private void NastepneDni_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PrzeniesDoKolejki_Click(object sender, EventArgs e)
+        {
+            if (WszystkieBadania.Contains(new Badania { Adres = PotrzebnyAdress })){
+                Kolejka.Enqueue(new BadanieWKolejce() { Numerek=Kolejka.Count+1,NextNumerek= Kolejka.Count,ObiektBadanie = WszystkieBadania[WszystkieBadania.FindIndex(a => a.Adres == PotrzebnyAdress)] } ); ;
+            }
+            UpdateKolejka();
+        }
+
+        private void KolejkaUsun_Click(object sender, EventArgs e)
+        {
+            if (Kolejka.Count > 0)
+            {
+                Kolejka.Dequeue();
+            }
+            UpdateKolejka();
+        }         
+
+    private void KolejkaNaKoniec_Click(object sender, EventArgs e)
+        {
+            if (Kolejka.Count > 0)
+            {
+                Kolejka.Enqueue(new BadanieWKolejce() { Numerek = Kolejka.Peek().Numerek, NextNumerek = Kolejka.Peek().NextNumerek, ObiektBadanie = Kolejka.Peek().ObiektBadanie });
+                Kolejka.Dequeue();
+            }
+            UpdateKolejka();
         }
     }
 }
