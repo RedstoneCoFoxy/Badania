@@ -77,11 +77,12 @@ namespace BadaniaNFZ
             {
                 return false;
             }
-            int x = WolnyNumerkKolejki-1;
-            while (KolejkaBadanTable[x].NextNumerek!=0) { 
-                if (KolejkaBadanTable[x].Numerek==Pozycja)
+            int x = WolnyNumerkKolejki - 1;
+            while (KolejkaBadanTable[x].NextNumerek != 0)
+            {
+                if (KolejkaBadanTable[x].Numerek == Pozycja)
                 {
-                return true;
+                    return true;
                 }
                 x = KolejkaBadanTable[x].NextNumerek;
             }
@@ -97,7 +98,7 @@ namespace BadaniaNFZ
 
         void WriteDebug()
         {
-            if (Debug) { DebugText.Text = WybranaData + " | " + WybraneImie + " " + WybraneNazwa+" | "+WolnyNumerkKolejki; };
+            if (Debug) { DebugText.Text = WybranaData + " | " + WybraneImie + " " + WybraneNazwa + " | " + WolnyNumerkKolejki; };
         }
 
         double ReturnTimeDate(string date)
@@ -217,7 +218,7 @@ namespace BadaniaNFZ
             WriteDebug();
             if (WolnyNumerkKolejki > 1)
             {
-                LabelKolejka_1.Text = "Pozycja 1" + " / " + KolejkaBadanTable[1].ToString()+" <<<";
+                LabelKolejka_1.Text = "Pozycja 1" + " / " + KolejkaBadanTable[1].ToString() + " <<<";
             }
             else
             {
@@ -242,7 +243,7 @@ namespace BadaniaNFZ
                 LabelKolejka_3.Text = "/";
             }
             var IloscKolejki = WolnyNumerkKolejki - 1;
-            LabelKolejka_Oczekujacy.Text = "Ilosc osob w kolejce: "+IloscKolejki;
+            LabelKolejka_Oczekujacy.Text = "Ilosc osob w kolejce: " + IloscKolejki;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -426,7 +427,7 @@ namespace BadaniaNFZ
 
         private void PrzeniesDoKolejki_Click(object sender, EventArgs e)
         {
-            KolejkaBadanTable[0] = new BadanieWKolejce();          
+            KolejkaBadanTable[0] = new BadanieWKolejce();
 
             if (WszystkieBadania.Contains(new Badania { Adres = PotrzebnyAdress }))
             {
@@ -445,14 +446,14 @@ namespace BadaniaNFZ
                 int i = 1;
                 KolejkaBadanTable[i] = KolejkaBadanTable[0];
                 i++;
-                    while (WolnyNumerkKolejki!> i) 
-                    {
-                        KolejkaBadanTable[i - 1] = KolejkaBadanTable[i];
-                        KolejkaBadanTable[i].Numerek = KolejkaBadanTable[i].Numerek - 1;
-                        KolejkaBadanTable[i].NextNumerek = KolejkaBadanTable[i].NextNumerek - 1;
-                        i++;
-                    }
-                    WolnyNumerkKolejki--;
+                while (WolnyNumerkKolejki! > i)
+                {
+                    KolejkaBadanTable[i - 1] = KolejkaBadanTable[i];
+                    KolejkaBadanTable[i].Numerek = KolejkaBadanTable[i].Numerek - 1;
+                    KolejkaBadanTable[i].NextNumerek = KolejkaBadanTable[i].NextNumerek - 1;
+                    i++;
+                }
+                WolnyNumerkKolejki--;
 
             }
             UpdateKolejka();
