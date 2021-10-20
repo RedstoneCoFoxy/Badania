@@ -59,6 +59,9 @@ namespace BadaniaNFZ
             this.label3 = new System.Windows.Forms.Label();
             this.FileName = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.LabelKolejka_Oczekujacy = new System.Windows.Forms.Label();
+            this.LabelKolejka_3 = new System.Windows.Forms.Label();
+            this.LabelKolejka_2 = new System.Windows.Forms.Label();
             this.KolejkaNaKoniec = new System.Windows.Forms.Button();
             this.KolejkaUsun = new System.Windows.Forms.Button();
             this.KolejkaLabelEmpty = new System.Windows.Forms.Label();
@@ -171,14 +174,14 @@ namespace BadaniaNFZ
             this.groupBox2.Controls.Add(this.ObecneBadanie);
             this.groupBox2.Location = new System.Drawing.Point(219, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(749, 305);
+            this.groupBox2.Size = new System.Drawing.Size(749, 239);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Badania";
             // 
             // PrzeniesDoKolejki
             // 
-            this.PrzeniesDoKolejki.Location = new System.Drawing.Point(434, 276);
+            this.PrzeniesDoKolejki.Location = new System.Drawing.Point(436, 201);
             this.PrzeniesDoKolejki.Name = "PrzeniesDoKolejki";
             this.PrzeniesDoKolejki.Size = new System.Drawing.Size(142, 23);
             this.PrzeniesDoKolejki.TabIndex = 12;
@@ -222,7 +225,7 @@ namespace BadaniaNFZ
             // 
             // ButtonMoveDown1
             // 
-            this.ButtonMoveDown1.Location = new System.Drawing.Point(325, 276);
+            this.ButtonMoveDown1.Location = new System.Drawing.Point(327, 201);
             this.ButtonMoveDown1.Name = "ButtonMoveDown1";
             this.ButtonMoveDown1.Size = new System.Drawing.Size(39, 23);
             this.ButtonMoveDown1.TabIndex = 8;
@@ -232,7 +235,7 @@ namespace BadaniaNFZ
             // 
             // ButtonMoveUp1
             // 
-            this.ButtonMoveUp1.Location = new System.Drawing.Point(280, 276);
+            this.ButtonMoveUp1.Location = new System.Drawing.Point(282, 201);
             this.ButtonMoveUp1.Name = "ButtonMoveUp1";
             this.ButtonMoveUp1.Size = new System.Drawing.Size(39, 23);
             this.ButtonMoveUp1.TabIndex = 7;
@@ -242,7 +245,7 @@ namespace BadaniaNFZ
             // 
             // ButtonUsunBadanie
             // 
-            this.ButtonUsunBadanie.Location = new System.Drawing.Point(199, 276);
+            this.ButtonUsunBadanie.Location = new System.Drawing.Point(201, 201);
             this.ButtonUsunBadanie.Name = "ButtonUsunBadanie";
             this.ButtonUsunBadanie.Size = new System.Drawing.Size(75, 23);
             this.ButtonUsunBadanie.TabIndex = 6;
@@ -252,7 +255,7 @@ namespace BadaniaNFZ
             // 
             // LabelWybranaPozycja
             // 
-            this.LabelWybranaPozycja.Location = new System.Drawing.Point(168, 276);
+            this.LabelWybranaPozycja.Location = new System.Drawing.Point(170, 201);
             this.LabelWybranaPozycja.Name = "LabelWybranaPozycja";
             this.LabelWybranaPozycja.Size = new System.Drawing.Size(49, 23);
             this.LabelWybranaPozycja.TabIndex = 5;
@@ -260,7 +263,7 @@ namespace BadaniaNFZ
             // 
             // ButtonPoprzednieBadanie
             // 
-            this.ButtonPoprzednieBadanie.Location = new System.Drawing.Point(6, 276);
+            this.ButtonPoprzednieBadanie.Location = new System.Drawing.Point(8, 201);
             this.ButtonPoprzednieBadanie.Name = "ButtonPoprzednieBadanie";
             this.ButtonPoprzednieBadanie.Size = new System.Drawing.Size(75, 23);
             this.ButtonPoprzednieBadanie.TabIndex = 4;
@@ -270,7 +273,7 @@ namespace BadaniaNFZ
             // 
             // ButtonNastepneBadanie
             // 
-            this.ButtonNastepneBadanie.Location = new System.Drawing.Point(87, 276);
+            this.ButtonNastepneBadanie.Location = new System.Drawing.Point(89, 201);
             this.ButtonNastepneBadanie.Name = "ButtonNastepneBadanie";
             this.ButtonNastepneBadanie.Size = new System.Drawing.Size(75, 23);
             this.ButtonNastepneBadanie.TabIndex = 3;
@@ -359,21 +362,54 @@ namespace BadaniaNFZ
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.LabelKolejka_Oczekujacy);
+            this.groupBox3.Controls.Add(this.LabelKolejka_3);
+            this.groupBox3.Controls.Add(this.LabelKolejka_2);
             this.groupBox3.Controls.Add(this.KolejkaNaKoniec);
             this.groupBox3.Controls.Add(this.KolejkaUsun);
             this.groupBox3.Controls.Add(this.KolejkaLabelEmpty);
             this.groupBox3.Controls.Add(this.LabelKolejka_1);
-            this.groupBox3.Location = new System.Drawing.Point(219, 329);
+            this.groupBox3.Location = new System.Drawing.Point(219, 253);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(749, 109);
+            this.groupBox3.Size = new System.Drawing.Size(749, 185);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Kolejka";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
+            // LabelKolejka_Oczekujacy
+            // 
+            this.LabelKolejka_Oczekujacy.AutoSize = true;
+            this.LabelKolejka_Oczekujacy.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelKolejka_Oczekujacy.Location = new System.Drawing.Point(222, 156);
+            this.LabelKolejka_Oczekujacy.Name = "LabelKolejka_Oczekujacy";
+            this.LabelKolejka_Oczekujacy.Size = new System.Drawing.Size(154, 21);
+            this.LabelKolejka_Oczekujacy.TabIndex = 10;
+            this.LabelKolejka_Oczekujacy.Text = "Ilosc osob w kolejce: ";
+            // 
+            // LabelKolejka_3
+            // 
+            this.LabelKolejka_3.AutoSize = true;
+            this.LabelKolejka_3.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelKolejka_3.Location = new System.Drawing.Point(6, 93);
+            this.LabelKolejka_3.Name = "LabelKolejka_3";
+            this.LabelKolejka_3.Size = new System.Drawing.Size(28, 37);
+            this.LabelKolejka_3.TabIndex = 9;
+            this.LabelKolejka_3.Text = "/";
+            // 
+            // LabelKolejka_2
+            // 
+            this.LabelKolejka_2.AutoSize = true;
+            this.LabelKolejka_2.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelKolejka_2.Location = new System.Drawing.Point(6, 56);
+            this.LabelKolejka_2.Name = "LabelKolejka_2";
+            this.LabelKolejka_2.Size = new System.Drawing.Size(28, 37);
+            this.LabelKolejka_2.TabIndex = 8;
+            this.LabelKolejka_2.Text = "/";
+            // 
             // KolejkaNaKoniec
             // 
-            this.KolejkaNaKoniec.Location = new System.Drawing.Point(117, 67);
+            this.KolejkaNaKoniec.Location = new System.Drawing.Point(115, 156);
             this.KolejkaNaKoniec.Name = "KolejkaNaKoniec";
             this.KolejkaNaKoniec.Size = new System.Drawing.Size(101, 23);
             this.KolejkaNaKoniec.TabIndex = 7;
@@ -383,11 +419,11 @@ namespace BadaniaNFZ
             // 
             // KolejkaUsun
             // 
-            this.KolejkaUsun.Location = new System.Drawing.Point(8, 67);
+            this.KolejkaUsun.Location = new System.Drawing.Point(6, 156);
             this.KolejkaUsun.Name = "KolejkaUsun";
             this.KolejkaUsun.Size = new System.Drawing.Size(103, 23);
             this.KolejkaUsun.TabIndex = 6;
-            this.KolejkaUsun.Text = "Usun";
+            this.KolejkaUsun.Text = "Usun Pierwszy";
             this.KolejkaUsun.UseVisualStyleBackColor = true;
             this.KolejkaUsun.Click += new System.EventHandler(this.KolejkaUsun_Click);
             // 
@@ -402,10 +438,10 @@ namespace BadaniaNFZ
             // LabelKolejka_1
             // 
             this.LabelKolejka_1.AutoSize = true;
-            this.LabelKolejka_1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelKolejka_1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.LabelKolejka_1.Location = new System.Drawing.Point(6, 19);
             this.LabelKolejka_1.Name = "LabelKolejka_1";
-            this.LabelKolejka_1.Size = new System.Drawing.Size(28, 37);
+            this.LabelKolejka_1.Size = new System.Drawing.Size(29, 37);
             this.LabelKolejka_1.TabIndex = 0;
             this.LabelKolejka_1.Text = "/";
             // 
@@ -470,6 +506,9 @@ namespace BadaniaNFZ
         private System.Windows.Forms.Button PrzeniesDoKolejki;
         private System.Windows.Forms.Button KolejkaNaKoniec;
         private System.Windows.Forms.Button KolejkaUsun;
+        private System.Windows.Forms.Label LabelKolejka_3;
+        private System.Windows.Forms.Label LabelKolejka_2;
+        private System.Windows.Forms.Label LabelKolejka_Oczekujacy;
     }
 }
 
