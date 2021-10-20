@@ -20,6 +20,7 @@ namespace BadaniaNFZ
 
         DateTime localDate = DateTime.Now;
         bool Debug = true;
+        int WolnyNumerkKolejki = 1;
         int NextFreeAdress = 0;
         int PotrzebnyAdress = 0;
         string WybranaData = "";
@@ -56,26 +57,51 @@ namespace BadaniaNFZ
             }
         }/// ================================================================
         List<Badania> WszystkieBadania = new List<Badania>();
-        
-            public class BadanieWKolejce
+
+        public class BadanieWKolejce
+        {
+
+            public int Numerek;
+            public int NextNumerek;
+            public Badania ObiektBadanie { get; set; }
+            public override string ToString()
             {
-                public int Numerek;
-                public int NextNumerek;
-                public Badania ObiektBadanie { get; set; }
-                public override string ToString()
-                {
-                    return "Pozycja 1" + " / " + ObiektBadanie.Data + " " + ObiektBadanie.Imie + " " + ObiektBadanie.Nazwa;
-                }
-                public int ReturnNumber()
-                {
-                    return Numerek;
-                }
-                public int ReturnNextNumber()
-                {
-                    return NextNumerek;
-                }
+                return "Pozycja 1" + " / " + ObiektBadanie.Data + " " + ObiektBadanie.Imie + " " + ObiektBadanie.Nazwa;
             }
-        Queue<BadanieWKolejce> Kolejka = new Queue<BadanieWKolejce>();
+            public int ReturnNumber()
+            {
+                return Numerek;
+            }
+            public int ReturnNextNumber()
+            {
+                return NextNumerek;
+            }
+            int Count()
+            {
+                int ilosc = 0;
+                return ilosc;
+            }
+            public void Enqueue(int aNumerek, int aNextNumerek, Badania aObiektBadanie)
+            {
+                Numerek = aNumerek;
+                NextNumerek = aNextNumerek;
+                ObiektBadanie = aObiektBadanie;
+            }
+            public int Peek()
+            {
+                return 1;
+            }
+            public void Dequeue(int aNumerek, int aNextNumerek, Badania aObiektBadanie)
+            {
+                Numerek = aNumerek;
+                NextNumerek = aNextNumerek;
+                ObiektBadanie = aObiektBadanie;
+            }
+        }
+        BadanieWKolejce[] KolejkaBadanTable = new BadanieWKolejce[10];
+     
+       
+
 
         // https://docs.microsoft.com/pl-pl/dotnet/api/system.collections.generic.list-1?view=net-5.0#definition
 
@@ -198,10 +224,12 @@ namespace BadaniaNFZ
         }
 
         void UpdateKolejka()
+
+
         {
-            if (Kolejka.Count>0)
+            if (WolnyNumerkKolejki>1)
             {
-                LabelKolejka_1.Text = Kolejka.Peek().ToString();  
+                LabelKolejka_1.Text = KolejkaBadanTable[1].ToString();  
             }
             else
             {
@@ -385,27 +413,53 @@ namespace BadaniaNFZ
 
         private void PrzeniesDoKolejki_Click(object sender, EventArgs e)
         {
-            if (WszystkieBadania.Contains(new Badania { Adres = PotrzebnyAdress })){
-                Kolejka.Enqueue(new BadanieWKolejce() { Numerek=Kolejka.Count+1,NextNumerek= Kolejka.Count,ObiektBadanie = WszystkieBadania[WszystkieBadania.FindIndex(a => a.Adres == PotrzebnyAdress)] } ); ;
+            KolejkaBadanTable[0] = new BadanieWKolejce();
+            KolejkaBadanTable[1] = new BadanieWKolejce();
+
+            if (WszystkieBadania.Contains(new Badania { Adres = PotrzebnyAdress }))
+            {
+
+                KolejkaBadanTable[WolnyNumerkKolejki].Numerek = WolnyNumerkKolejki;
+                KolejkaBadanTable[WolnyNumerkKolejki].NextNumerek = WolnyNumerkKolejki - 1;
+                KolejkaBadanTable[WolnyNumerkKolejki].ObiektBadanie = WszystkieBadania[WszystkieBadania.FindIndex(a => a.Adres == PotrzebnyAdress)];
+                WolnyNumerkKolejki= WolnyNumerkKolejki +1;
             }
             UpdateKolejka();
         }
-
         private void KolejkaUsun_Click(object sender, EventArgs e)
         {
-            if (Kolejka.Count > 0)
+            if (WolnyNumerkKolejki > 1)
             {
-                Kolejka.Dequeue();
+                int i = 1;
+                KolejkaBadanTable[i] = KolejkaBadanTable[1];
+                i++;
+                while (KolejkaBadanTable[i].Numerek > 1)
+                {
+                    KolejkaBadanTable[i].Numerek = KolejkaBadanTable[i].Numerek - 1;
+                    KolejkaBadanTable[i].NextNumerek = KolejkaBadanTable[i].NextNumerek - 1;
+                    i++;
+                }
+                WolnyNumerkKolejki= WolnyNumerkKolejki - 1;
             }
             UpdateKolejka();
         }         
 
     private void KolejkaNaKoniec_Click(object sender, EventArgs e)
         {
-            if (Kolejka.Count > 0)
+            if (WolnyNumerkKolejki > 1)
             {
-                Kolejka.Enqueue(new BadanieWKolejce() { Numerek = Kolejka.Peek().Numerek, NextNumerek = Kolejka.Peek().NextNumerek, ObiektBadanie = Kolejka.Peek().ObiektBadanie });
-                Kolejka.Dequeue();
+                KolejkaBadanTable[WolnyNumerkKolejki] = KolejkaBadanTable[1];
+                WolnyNumerkKolejki++;
+                int i = 1;
+                KolejkaBadanTable[i] = KolejkaBadanTable[1];
+                i++;
+                while (KolejkaBadanTable[i].Numerek > 1)
+                {
+                    KolejkaBadanTable[i].Numerek = KolejkaBadanTable[i].Numerek - 1;
+                    KolejkaBadanTable[i].NextNumerek = KolejkaBadanTable[i].NextNumerek - 1;
+                    i++;
+                }
+                WolnyNumerkKolejki = WolnyNumerkKolejki - 1;
             }
             UpdateKolejka();
         }
